@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<jpa:entity-mappings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:java="http://jcp.org/en/jsr/detail?id=270" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jpa="http://java.sun.com/xml/ns/persistence/orm" pkg="com.udea.tiendamascotas.entity" v="4.4" rws="_15214265071132" Pws="_15214265071132" cws="_15214265071132" persistenceUnitName="TiendaMascotas_LabPU" pp="E" sm="false" xs="false" id="_15214265071131" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_1.xsd">
+    <jpa:entity lbl-ref="_15214283973929" compositePrimaryKeyClass="ArticuloPK" abs="false" class="Articulo" v="true" jbn="false" xre="false" m="false" rootElement="_15214265071131" id="_1521428397390">
+        <jpa:ts e="true">
+            <jpa:a>_15214283973929</jpa:a>
+            <jpa:a>_152142846447311</jpa:a>
+            <jpa:a>_152142852515312</jpa:a>
+            <jpa:a>_152210761046758</jpa:a>
+            <jpa:a>_152244478810357</jpa:a>
+            <jpa:a>_152244479424358</jpa:a>
+            <jpa:a>_152244480814160</jpa:a>
+        </jpa:ts>
+        <jpa:hc e="true">
+            <jpa:a>_15214283973929</jpa:a>
+        </jpa:hc>
+        <jpa:eq e="true">
+            <jpa:a>_15214283973929</jpa:a>
+        </jpa:eq>
+        <jpa:con am="PUBLIC" e="true"/>
+        <jpa:con am="PUBLIC" e="true">
+            <jpa:a>_15214283973929</jpa:a>
+            <jpa:a>_152142846447311</jpa:a>
+            <jpa:a>_152142852515312</jpa:a>
+            <jpa:a>_152210761046758</jpa:a>
+            <jpa:a>_152244478810357</jpa:a>
+            <jpa:a>_152244479424358</jpa:a>
+            <jpa:a>_152244480814160</jpa:a>
+        </jpa:con>
+        <jpa:ath>gaviriza</jpa:ath>
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" v="true" xvt="" name="nombre" ft="false" id="_152142846447311">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+                <jpa:bv>
+                    <jpa:nu m="Ingrese el nombre del artículo"/>
+                </jpa:bv>
+                <jpa:column name="nombre" unique="false" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Double" v="true" xvt="" name="precio" ft="false" id="_152142852515312">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+                <jpa:bv>
+                    <jpa:nn m="Ingrese el precio del artículo"/>
+                </jpa:bv>
+                <jpa:column name="precio" unique="false" nullable="false" insertable="true" updatable="true" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:basic attribute-type="byte[]" v="true" xvt="" name="foto" ft="false" id="_152210761046758">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+                <jpa:bv>
+                    <jpa:nn m="Ingrese una foto"/>
+                </jpa:bv>
+                <jpa:column name="foto" unique="false" nullable="false" insertable="true" updatable="true"/>
+                <jpa:lob/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" v="true" xvt="" name="especie" id="_152244478810357">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+                <jpa:column name="especie" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" v="true" xvt="" name="raza" id="_152244479424358">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+                <jpa:column name="especie" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic attribute-type="int" v="true" xvt="" name="edad" id="_152244480814160">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+                <jpa:column name="edad" unique="false" nullable="true" insertable="true" updatable="true" precision="0"/>
+            </jpa:basic>
+            <jpa:id attribute-type="Long" v="true" xvt="" name="id_articulo" ft="false" id="_15214283973929">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+                <jpa:bv>
+                    <jpa:nn m="Ingrese un id"/>
+                </jpa:bv>
+                <jpa:column name="id" unique="true" nullable="false" insertable="true" updatable="true"/>
+                <jpa:generated-value/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="Articulo.findAll">
+            <jpa:query>Select e from Articulo e</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Articulo.findByNombre">
+            <jpa:query>Select a from Articulo a where a.nombre=:nombre</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Articulo.findByPrecio">
+            <jpa:query>Select a from Articulo a where a.precio=:precio</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Articulo.findByFoto">
+            <jpa:query>Select a from Articulo a where a.foto=:foto</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Articulo.findByEspecie">
+            <jpa:query>Select a from Articulo a where a.especie=:especie</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Articulo.findByRaza">
+            <jpa:query>Select a from Articulo a where a.raza=:raza</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Articulo.findByEdad">
+            <jpa:query>Select a from Articulo a where a.edad=:edad</jpa:query>
+        </jpa:nq>
+    </jpa:entity>
+    <jpa:entity name="Venta" lbl-ref="_152204584504962" compositePrimaryKeyClass="VentaPK" abs="false" class="Venta" v="true" jbn="false" xre="false" m="false" rootElement="_15214265071131" id="_1522045845048">
+        <jpa:ts e="true">
+            <jpa:a>_152204584504962</jpa:a>
+            <jpa:a>_152244492258562</jpa:a>
+        </jpa:ts>
+        <jpa:hc e="true">
+            <jpa:a>_152204584504962</jpa:a>
+        </jpa:hc>
+        <jpa:eq e="true">
+            <jpa:a>_152204584504962</jpa:a>
+        </jpa:eq>
+        <jpa:con am="PUBLIC" e="true"/>
+        <jpa:con am="PUBLIC" e="true">
+            <jpa:a>_152204584504962</jpa:a>
+            <jpa:a>_152244492258562</jpa:a>
+        </jpa:con>
+        <jpa:ath>gaviriza</jpa:ath>
+        <jpa:attributes>
+            <jpa:basic attribute-type="List&lt;Articulo&gt;" v="true" xvt="" name="articulosComprados" id="_152244492258562">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+                <jpa:column name="articulosComprados" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:one-to-many orp="false" own="true" collection-type="java.util.List" connected-entity-id="_1521428397390" v="true" xvt="" name="articulos" id="_152210443855350">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+            </jpa:one-to-many>
+            <jpa:id attribute-type="Long" v="true" xvt="" name="id_venta" ft="false" id="_152204584504962">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+                <jpa:bv>
+                    <jpa:nn m="Ingrese un id"/>
+                </jpa:bv>
+                <jpa:column name="id_venta" unique="true" nullable="false" insertable="true" updatable="true"/>
+                <jpa:generated-value/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="Venta.findAll">
+            <jpa:query>Select e from Venta e</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Venta.findByArticulosComprados">
+            <jpa:query>Select v from Venta v where v.articulosComprados=:articulosComprados</jpa:query>
+        </jpa:nq>
+    </jpa:entity>
+    <jpa:entity lbl-ref="_152210335855918" compositePrimaryKeyClass="FacturaPK" abs="false" class="Factura" v="true" jbn="false" xre="false" m="false" rootElement="_15214265071131" id="_1522103358557">
+        <jpa:ts e="true">
+            <jpa:a>_152210335855918</jpa:a>
+            <jpa:a>_152210340360920</jpa:a>
+            <jpa:a>_152210342628821</jpa:a>
+            <jpa:a>_152210344496022</jpa:a>
+        </jpa:ts>
+        <jpa:hc e="true">
+            <jpa:a>_152210335855918</jpa:a>
+        </jpa:hc>
+        <jpa:eq e="true">
+            <jpa:a>_152210335855918</jpa:a>
+        </jpa:eq>
+        <jpa:con am="PUBLIC" e="true">
+            <jpa:a>_152210335855918</jpa:a>
+            <jpa:a>_152210340360920</jpa:a>
+            <jpa:a>_152210342628821</jpa:a>
+            <jpa:a>_152210344496022</jpa:a>
+        </jpa:con>
+        <jpa:con am="PUBLIC" e="true"/>
+        <jpa:ath>gaviriza</jpa:ath>
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" v="true" xvt="" name="nombre_comprador" ft="false" id="_152210340360920">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+                <jpa:bv>
+                    <jpa:nn m="Ingrese el nombre del comprador"/>
+                </jpa:bv>
+                <jpa:column name="nombre_comprador" unique="false" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic attribute-type="java.util.Date" v="true" xvt="" name="fecha" ft="false" id="_152210342628821">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+                <jpa:bv>
+                    <jpa:nn m="Ingrese una fecha"/>
+                </jpa:bv>
+                <jpa:temporal>DATE</jpa:temporal>
+                <jpa:column name="fecha" unique="false" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" v="true" xvt="" name="nombre_vendedor" ft="false" id="_152210344496022">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+                <jpa:bv>
+                    <jpa:nn m="Ingrese el nombre del vendedor"/>
+                </jpa:bv>
+                <jpa:column name="nombre_vendedor" unique="false" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:one-to-one own="true" primaryKey="false" connected-entity-id="_1522045845048" v="true" name="venta" id="_152244484251361"/>
+            <jpa:id attribute-type="Long" v="true" xvt="" name="id_factura" ft="false" id="_152210335855918">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+                <jpa:bv>
+                    <jpa:nn m="Ingrese un id"/>
+                </jpa:bv>
+                <jpa:column name="id_factura" unique="true" nullable="false" insertable="true" updatable="true"/>
+                <jpa:generated-value/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="Facturas.findAll">
+            <jpa:query>Select e from Facturas e</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Facturas.findByNombre_comprador">
+            <jpa:query>Select f from Facturas f where f.nombre_comprador=:nombre_comprador</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Facturas.findByFecha">
+            <jpa:query>Select f from Facturas f where f.fecha=:fecha</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Facturas.findByNombre_vendedor">
+            <jpa:query>Select f from Facturas f where f.nombre_vendedor=:nombre_vendedor</jpa:query>
+        </jpa:nq>
+    </jpa:entity>
+    <jpa:snp loc="BEFORE_PACKAGE" e="true">/**
+ * This file was generated by the Jeddict
+ */</jpa:snp>
+    <jpa:c>
+        <ct>java.util.List</ct>
+        <ct>java.util.Set</ct>
+        <ct>java.util.Map</ct>
+        <ct>java.util.Collection</ct>
+        <cit>java.util.ArrayList</cit>
+        <cit>java.util.LinkedList</cit>
+        <cit>java.util.HashSet</cit>
+        <cit>java.util.TreeSet</cit>
+        <cit>java.util.HashMap</cit>
+    </jpa:c>
+    <jpa:wsl>
+        <jpa:ws n="Main" id="_15214265071132">
+            <i ref="_1522045845048" x="590" y="89"/>
+            <i ref="_1521428397390" x="334" y="65"/>
+            <i ref="_1522103358557" x="708" y="319"/>
+        </jpa:ws>
+    </jpa:wsl>
+</jpa:entity-mappings>
