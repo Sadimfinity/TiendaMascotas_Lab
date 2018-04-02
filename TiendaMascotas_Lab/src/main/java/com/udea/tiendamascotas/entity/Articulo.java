@@ -10,13 +10,12 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
 
 /**
  * @author gaviriza
  */
 @Entity
-public class Articulo implements Serializable{
+public class Articulo implements Serializable {
 
     @Column(name = "id_articulo", unique = true, nullable = false)
     @Id
@@ -25,7 +24,7 @@ public class Articulo implements Serializable{
 
     @Column(name = "nombre", nullable = false)
     @Basic
-    @Null(message = "Ingrese el nombre del artÃ­culo")
+    @NotNull(message = "Ingrese el nombre del articulo")
     private String nombre;
 
     @Column(name = "precio", nullable = false)
@@ -43,7 +42,7 @@ public class Articulo implements Serializable{
     @Basic
     private String especie;
 
-    @Column(name = "especie")
+    @Column(name = "raza")
     @Basic
     private String raza;
 
@@ -137,8 +136,8 @@ public class Articulo implements Serializable{
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 83 * hash + (this.getId_articulo() != null ? this.getId_articulo().hashCode() : 0);
+        int hash = 7;
+        hash = 53 * hash + (this.getId_articulo() != null ? this.getId_articulo().hashCode() : 0);
         return hash;
     }
 

@@ -26,7 +26,7 @@ public class Venta implements Serializable {
     @Column(nullable = false)
     @Basic
     @NotNull(message = "Deben haber articulos comprados para generar una venta")
-    private List<Articulo> articulosComprados;
+    private List articulosComprados;
 
     @OneToMany(targetEntity = Articulo.class)
     private List<Articulo> articulos;
@@ -47,7 +47,7 @@ public class Venta implements Serializable {
     }
 
     public List getArticulosComprados() {
-        return this.articulos;
+        return this.articulosComprados;
     }
 
     public void setArticulosComprados(List articulosComprados) {
@@ -79,7 +79,7 @@ public class Venta implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 3;
+        int hash = 7;
         hash = 37 * hash + (this.getId_venta() != null ? this.getId_venta().hashCode() : 0);
         return hash;
     }

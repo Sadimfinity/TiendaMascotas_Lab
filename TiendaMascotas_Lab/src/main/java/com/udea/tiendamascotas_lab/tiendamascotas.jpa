@@ -32,7 +32,7 @@
                 <jpa:xwm nil="false" req="false"/>
                 <jpa:xm nil="false" req="false"/>
                 <jpa:bv>
-                    <jpa:nu m="Ingrese el nombre del artículo"/>
+                    <jpa:nn m="Ingrese el nombre del articulo"/>
                 </jpa:bv>
                 <jpa:column name="nombre" unique="false" nullable="false" insertable="true" updatable="true"/>
             </jpa:basic>
@@ -61,7 +61,7 @@
             <jpa:basic attribute-type="String" v="true" xvt="" name="raza" id="_152262217747939">
                 <jpa:xwm nil="false" req="false"/>
                 <jpa:xm nil="false" req="false"/>
-                <jpa:column name="especie" unique="false" nullable="true" insertable="true" updatable="true"/>
+                <jpa:column name="raza" unique="false" nullable="true" insertable="true" updatable="true"/>
             </jpa:basic>
             <jpa:basic attribute-type="int" v="true" xvt="" name="edad" id="_152262217747940">
                 <jpa:xwm nil="false" req="false"/>

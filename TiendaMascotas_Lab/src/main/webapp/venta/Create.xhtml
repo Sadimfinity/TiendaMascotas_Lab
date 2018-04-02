@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateVentaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateVentaLabel_id_venta}" for="id_venta" />
+                    <h:inputText id="id_venta" value="#{ventaController.selected.id_venta}" title="#{bundle.CreateVentaTitle_id_venta}" required="true" requiredMessage="#{bundle.CreateVentaRequiredMessage_id_venta}"/>
+                    <h:outputLabel value="#{bundle.CreateVentaLabel_articulosComprados}" for="articulosComprados" />
+                    <h:inputText id="articulosComprados" value="#{ventaController.selected.articulosComprados}" title="#{bundle.CreateVentaTitle_articulosComprados}" required="true" requiredMessage="#{bundle.CreateVentaRequiredMessage_articulosComprados}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{ventaController.create}" value="#{bundle.CreateVentaSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{ventaController.prepareList}" value="#{bundle.CreateVentaShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateVentaIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -24,7 +24,7 @@ public class Factura implements Serializable {
     @Id
     @NotNull(message = "Ingrese un id")
     private Long id_factura;
-    
+
     @Column(name = "nombre_comprador", nullable = false)
     @Basic
     @NotNull(message = "Ingrese el nombre del comprador")
@@ -111,7 +111,7 @@ public class Factura implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 3;
+        int hash = 7;
         hash = 67 * hash + (this.getId_factura() != null ? this.getId_factura().hashCode() : 0);
         return hash;
     }
