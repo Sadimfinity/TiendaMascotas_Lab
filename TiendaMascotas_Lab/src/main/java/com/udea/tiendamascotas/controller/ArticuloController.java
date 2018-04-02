@@ -81,6 +81,19 @@ public class ArticuloController implements Serializable {
 
     public String create() {
         try {
+            String especie = current.getEspecie();
+            String raza = current.getRaza();
+            int edad = current.getEdad();
+            if(especie.equals("")){
+                current.setEspecie(null);
+            }
+            if(raza.equals("")){
+                current.setRaza(null);
+            }
+            if(String.valueOf(edad).equals("")){
+                current.setEdad(0);
+            }
+            current.setFoto(null);
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ArticuloCreated"));
             return prepareCreate();
