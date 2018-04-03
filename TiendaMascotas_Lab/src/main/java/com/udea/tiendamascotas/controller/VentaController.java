@@ -6,6 +6,7 @@ import com.udea.tiendamascotas.controller.util.PaginationHelper;
 import com.udea.tiendamascotas.ejb.VentaFacade;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -34,10 +35,7 @@ public class VentaController implements Serializable {
 
     public Venta getSelected() {
         if (current == null) {
-            
-            
-            
-            
+
             current = new Venta();
             selectedItemIndex = -1;
         }
@@ -85,6 +83,25 @@ public class VentaController implements Serializable {
 
     public String create() {
         try {
+            String json = current.getIdArticulosComprados();
+            String idEntrante = "";
+            Long id;
+            int i = 0;
+            List<Long> listaIds = null;
+            while (i < json.length()) {
+                try {
+                    while (String.valueOf(json.charAt(i)).equals(",")) {
+                        idEntrante = idEntrante + json.charAt(i);
+                        i = i + 1;
+                    }
+                    id = Long.valueOf(idEntrante);
+                    listaIds.add(id);
+                    i = i + 1;
+                } catch (NumberFormatException e) {
+                    JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+                }
+            }       
+            current.setArticulosComprados(listaIds);
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("VentaCreated"));
             return prepareCreate();
