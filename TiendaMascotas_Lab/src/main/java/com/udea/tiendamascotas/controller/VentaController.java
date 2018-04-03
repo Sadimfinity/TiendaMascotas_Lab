@@ -30,8 +30,17 @@ public class VentaController implements Serializable {
     private com.udea.tiendamascotas.ejb.VentaFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    private String idArticulosComprados;
 
     public VentaController() {
+    }
+
+    public String getIdArticulosComprados() {
+        return idArticulosComprados;
+    }
+
+    public void setIdArticulosComprados(String idArticulosComprados) {
+        this.idArticulosComprados = idArticulosComprados;
     }
 
     public Venta getSelected() {
@@ -84,7 +93,7 @@ public class VentaController implements Serializable {
 
     public String create() {
         try {
-            String json = current.getIdArticulosComprados();
+            String json = getIdArticulosComprados();
             String[] conjuntoIds = json.split(",");
             List <Long> listaIds = new ArrayList<>();
             int idEntrante;

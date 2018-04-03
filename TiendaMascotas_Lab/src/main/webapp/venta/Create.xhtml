@@ -18,7 +18,7 @@
                     <h:outputLabel value="#{bundle.CreateVentaLabel_id_venta}" for="id_venta" />
                     <h:inputText id="id_venta" value="#{ventaController.selected.id_venta}" title="#{bundle.CreateVentaTitle_id_venta}" required="true" requiredMessage="#{bundle.CreateVentaRequiredMessage_id_venta}"/>
                     <h:outputLabel value="#{bundle.CreateVentaLabel_articulosComprados}" for="articulosComprados" />
-                    <h:inputText id="articulosComprados" value="#{ventaController.selected.idArticulosComprados}" title="#{bundle.CreateVentaTitle_articulosComprados}" required="true" requiredMessage="#{bundle.CreateVentaRequiredMessage_articulosComprados}"/>
+                    <h:inputText id="articulosComprados" value="#{ventaController.idArticulosComprados}" title="#{bundle.CreateVentaTitle_articulosComprados}" required="true" requiredMessage="#{bundle.CreateVentaRequiredMessage_articulosComprados}"/>
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{ventaController.create}" value="#{bundle.CreateVentaSaveLink}" />

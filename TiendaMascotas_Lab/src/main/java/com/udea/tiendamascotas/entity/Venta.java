@@ -30,17 +30,8 @@ public class Venta implements Serializable {
 
     @OneToMany(targetEntity = Articulo.class)
     private List<Articulo> articulos;
-
-    public void setIdArticulosComprados(String idArticulosComprados) {
-        this.idArticulosComprados = idArticulosComprados;
-    }
-
-    public String getIdArticulosComprados() {
-        return idArticulosComprados;
-    }
     
-    private String idArticulosComprados;
-
+    
     public Venta() {
     }
 
