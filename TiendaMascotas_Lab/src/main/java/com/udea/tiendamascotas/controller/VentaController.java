@@ -6,6 +6,7 @@ import com.udea.tiendamascotas.controller.util.PaginationHelper;
 import com.udea.tiendamascotas.ejb.VentaFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
@@ -84,28 +85,20 @@ public class VentaController implements Serializable {
     public String create() {
         try {
             String json = current.getIdArticulosComprados();
-            String idEntrante = "";
+            String[] conjuntoIds = json.split(",");
+            List <Long> listaIds = new ArrayList<>();
+            int idEntrante;
             Long id;
-            int i = 0;
-            List<Long> listaIds = null;
-            while (i < json.length()) {
-                try {
-                    while (String.valueOf(json.charAt(i)).equals(",")) {
-                        idEntrante = idEntrante + json.charAt(i);
-                        i = i + 1;
-                    }
-                    id = Long.valueOf(idEntrante);
-                    listaIds.add(id);
-                    i = i + 1;
-                } catch (NumberFormatException e) {
-                    JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
-                }
-            }       
+            for(int i = 0; i< conjuntoIds.length; i++){
+                idEntrante = Integer.valueOf(conjuntoIds[i]);
+                id = new Long(idEntrante);
+                listaIds.add(i ,id);
+            }
             current.setArticulosComprados(listaIds);
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("VentaCreated"));
             return prepareCreate();
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
         }
