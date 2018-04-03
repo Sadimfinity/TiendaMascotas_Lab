@@ -34,6 +34,10 @@ public class VentaController implements Serializable {
 
     public Venta getSelected() {
         if (current == null) {
+            
+            
+            
+            
             current = new Venta();
             selectedItemIndex = -1;
         }
