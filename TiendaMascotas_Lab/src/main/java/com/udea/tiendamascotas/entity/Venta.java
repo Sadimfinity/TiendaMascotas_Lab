@@ -98,7 +98,7 @@ public class Venta implements Serializable {
 
     @Override
     public String toString() {
-        return "Venta{" + " id_venta=" + id_venta + '}';
+        return "Articulos comprados: "+ articulosComprados;
     }
 
 }
