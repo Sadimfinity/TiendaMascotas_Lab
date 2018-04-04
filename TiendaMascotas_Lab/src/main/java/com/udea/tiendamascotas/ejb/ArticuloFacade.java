@@ -32,17 +32,17 @@ public class ArticuloFacade extends AbstractFacade<Articulo> {
         super(Articulo.class);
     }
     
-    public Articulo findById(long id){
-        String q = "Select a from Articulo a where a.id_articulo=:id_articulo";
-        Query query = em.createNamedQuery(q);
-        query.setParameter("id_articulo", id);
-        return (Articulo) query.getSingleResult();
-    }
         
     public List<Articulo> findAllArticulos(){
         Query query = em.createNamedQuery("Articulo.findAll");
         return (List<Articulo>) query.getResultList();
     }    
+    
+    public Articulo findArticuloById(long id){
+        Query query = em.createNamedQuery("Articulo.findByIdArticulo");
+        query.setParameter("id_articulo", id);
+        return (Articulo) query.getSingleResult();
+    }
 
 
     @PreDestroy

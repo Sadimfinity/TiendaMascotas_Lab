@@ -10,6 +10,7 @@ import com.udea.tiendamascotas.ejb.ArticuloFacade;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -30,17 +31,14 @@ public class VentaController implements Serializable {
 
     @EJB
     private ArticuloFacade articuloFacade;
-    
+
     private Venta current;
-    
+
 //    private List lst = current.getArticulosComprados();
-    
-    
     private DataModel items = null;
     @EJB
     private com.udea.tiendamascotas.ejb.VentaFacade ejbFacade;
-    
-    
+
     private com.udea.tiendamascotas.ejb.ArticuloFacade ejbArticuloFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
@@ -74,7 +72,7 @@ public class VentaController implements Serializable {
     private VentaFacade getFacade() {
         return ejbFacade;
     }
-    
+
     public PaginationHelper getPagination() {
         if (pagination == null) {
             pagination = new PaginationHelper(10) {
@@ -114,12 +112,12 @@ public class VentaController implements Serializable {
         try {
             String json = getIdArticulosComprados();
             String[] conjuntoIds = json.split(",");
-            List<Long> listaIds = new ArrayList<>();
+            List listaIds = new LinkedList();
             int idEntrante;
-            Long id;
+            long id;
             for (int i = 0; i < conjuntoIds.length; i++) {
                 idEntrante = Integer.valueOf(conjuntoIds[i]);
-                id = new Long(idEntrante);
+                id = (long) idEntrante;
                 listaIds.add(i, id);
             }
             current.setArticulosComprados(listaIds);
@@ -195,27 +193,22 @@ public class VentaController implements Serializable {
         }
     }
 
-    
-    public List getarticulos(){
-      return current.getArticulosComprados();
+    public List getarticulos() {
+        return current.getArticulosComprados();
     }
-    
-    public List<String> getNombreArticulosComprados(List articulosComprados){
-        List<String> nombreArticulos = new ArrayList<>();
-        List<Articulo> allArticulos = articuloFacade.findAllArticulos();
-        Long id;
-        for (int i = 0; i < articulosComprados.size(); i++) {
-                id =(Long) articulosComprados.get(i);
-            for (Articulo allArticulo : allArticulos) {
-                if(Objects.equals(allArticulo.getId_articulo(), id)){
-                    nombreArticulos.add(allArticulo.getNombre());
-                }
-            }
-        }
 
+    public String getNombreArticulosComprados(List idArticulosComprados) {
+        String nombreArticulos = "";
+        long id;
+        Articulo art;
+        for (int i = 0; i < idArticulosComprados.size(); i++) {
+            id = (long) idArticulosComprados.get(i);
+            art = articuloFacade.findArticuloById(id);
+            nombreArticulos = nombreArticulos + ", " + art.getNombre();
+        }
         return nombreArticulos;
     }
-                
+
     public DataModel getItems() {
         if (items == null) {
             items = getPagination().createPageDataModel();

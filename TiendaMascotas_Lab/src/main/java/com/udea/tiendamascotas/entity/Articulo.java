@@ -23,13 +23,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Articulo.findAll", query = "SELECT a FROM Articulo a")
-    , @NamedQuery(name = "Automovil.findByIdArticulo", query = "SELECT a FROM Articulo a WHERE a.id_articulo = :id_articulo")
-    , @NamedQuery(name = "Automovil.findByNombre", query = "SELECT a FROM Articulo a WHERE a.nombre = :nombre")
-    , @NamedQuery(name = "Automovil.findByColor", query = "SELECT a FROM Articulo a WHERE a.precio = :precio")
-    , @NamedQuery(name = "Automovil.findByPrecio", query = "SELECT a FROM Articulo a WHERE a.foto = :foto")
-    , @NamedQuery(name = "Automovil.findByEnVenta", query = "SELECT a FROM Articulo a WHERE a.especie = :especie")
-    , @NamedQuery(name = "Automovil.findByMesesGarantia", query = "SELECT a FROM Articulo a WHERE a.raza = :raza")
-    , @NamedQuery(name = "Automovil.findByMesesGarantia", query = "SELECT a FROM Articulo a WHERE a.edad = :edad")})
+    , @NamedQuery(name = "Articulo.findByIdArticulo", query = "SELECT a FROM Articulo a WHERE a.id_articulo=:id_articulo")
+    , @NamedQuery(name = "Articulo.findByNombre", query = "SELECT a FROM Articulo a WHERE a.nombre = :nombre")
+    , @NamedQuery(name = "Articulo.findByPrecio", query = "SELECT a FROM Articulo a WHERE a.precio = :precio")
+    , @NamedQuery(name = "Articulo.findByFoto", query = "SELECT a FROM Articulo a WHERE a.foto = :foto")
+    , @NamedQuery(name = "Articulo.findByEspecie", query = "SELECT a FROM Articulo a WHERE a.especie = :especie")
+    , @NamedQuery(name = "Articulo.findByRaza", query = "SELECT a FROM Articulo a WHERE a.raza = :raza")
+    , @NamedQuery(name = "Articulo.findByEdad", query = "SELECT a FROM Articulo a WHERE a.edad = :edad")})
 
 public class Articulo implements Serializable {
 
