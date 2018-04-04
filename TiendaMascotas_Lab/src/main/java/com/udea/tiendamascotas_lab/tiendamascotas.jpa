@@ -78,25 +78,25 @@
                 <jpa:generated-value/>
             </jpa:id>
         </jpa:attributes>
-        <jpa:nq e="false" name="Articulo.findAll">
+        <jpa:nq e="true" name="Articulo.findAll">
             <jpa:query>Select e from Articulo e</jpa:query>
         </jpa:nq>
-        <jpa:nq e="false" name="Articulo.findByNombre">
+        <jpa:nq e="true" name="Articulo.findByNombre">
             <jpa:query>Select a from Articulo a where a.nombre=:nombre</jpa:query>
         </jpa:nq>
-        <jpa:nq e="false" name="Articulo.findByPrecio">
+        <jpa:nq e="true" name="Articulo.findByPrecio">
             <jpa:query>Select a from Articulo a where a.precio=:precio</jpa:query>
         </jpa:nq>
-        <jpa:nq e="false" name="Articulo.findByFoto">
+        <jpa:nq e="true" name="Articulo.findByFoto">
             <jpa:query>Select a from Articulo a where a.foto=:foto</jpa:query>
         </jpa:nq>
-        <jpa:nq e="false" name="Articulo.findByEspecie">
+        <jpa:nq e="true" name="Articulo.findByEspecie">
             <jpa:query>Select a from Articulo a where a.especie=:especie</jpa:query>
         </jpa:nq>
-        <jpa:nq e="false" name="Articulo.findByRaza">
+        <jpa:nq e="true" name="Articulo.findByRaza">
             <jpa:query>Select a from Articulo a where a.raza=:raza</jpa:query>
         </jpa:nq>
-        <jpa:nq e="false" name="Articulo.findByEdad">
+        <jpa:nq e="true" name="Articulo.findByEdad">
             <jpa:query>Select a from Articulo a where a.edad=:edad</jpa:query>
         </jpa:nq>
     </jpa:entity>
@@ -228,7 +228,7 @@
     <jpa:wsl>
         <jpa:ws n="Main" id="_152262215202232">
             <i ref="_152262217747941" x="406" y="74"/>
-            <i ref="_152262217747933" x="150" y="50"/>
+            <i ref="_152262217747933" x="161" y="107"/>
             <i ref="_152262217747945" x="524" y="304"/>
         </jpa:ws>
     </jpa:wsl>

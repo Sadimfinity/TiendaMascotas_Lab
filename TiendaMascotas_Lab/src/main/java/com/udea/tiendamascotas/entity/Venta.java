@@ -9,13 +9,24 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author gaviriza
  */
+@Table(name = "venta")
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Venta.findAll", query = "SELECT a FROM Venta a")
+    , @NamedQuery(name = "Venta.findByIdVenta", query = "SELECT a FROM Venta a WHERE a.id_venta = :id_venta")
+    , @NamedQuery(name = "Venta.findByArticulosComprados", query = "SELECT a FROM Venta a WHERE a.articulosComprados = :articulosComprados")})
 @Entity(name = "Venta")
+
 public class Venta implements Serializable {
 
     @Column(name = "id_venta", unique = true, nullable = false)

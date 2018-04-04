@@ -9,12 +9,28 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author gaviriza
  */
 @Entity
+@Table(name = "articulo")
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Articulo.findAll", query = "SELECT a FROM Articulo a")
+    , @NamedQuery(name = "Automovil.findByIdArticulo", query = "SELECT a FROM Articulo a WHERE a.id_articulo = :id_articulo")
+    , @NamedQuery(name = "Automovil.findByNombre", query = "SELECT a FROM Articulo a WHERE a.nombre = :nombre")
+    , @NamedQuery(name = "Automovil.findByColor", query = "SELECT a FROM Articulo a WHERE a.precio = :precio")
+    , @NamedQuery(name = "Automovil.findByPrecio", query = "SELECT a FROM Articulo a WHERE a.foto = :foto")
+    , @NamedQuery(name = "Automovil.findByEnVenta", query = "SELECT a FROM Articulo a WHERE a.especie = :especie")
+    , @NamedQuery(name = "Automovil.findByMesesGarantia", query = "SELECT a FROM Articulo a WHERE a.raza = :raza")
+    , @NamedQuery(name = "Automovil.findByMesesGarantia", query = "SELECT a FROM Articulo a WHERE a.edad = :edad")})
+
 public class Articulo implements Serializable {
 
     @Column(name = "id_articulo", unique = true, nullable = false)

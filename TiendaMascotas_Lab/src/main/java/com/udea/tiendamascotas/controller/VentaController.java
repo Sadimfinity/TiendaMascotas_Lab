@@ -5,10 +5,13 @@ import com.udea.tiendamascotas.controller.util.JsfUtil;
 import com.udea.tiendamascotas.controller.util.PaginationHelper;
 import com.udea.tiendamascotas.ejb.VentaFacade;
 import com.udea.tiendamascotas.entity.Articulo;
+import com.udea.tiendamascotas.controller.ArticuloController;
+import com.udea.tiendamascotas.ejb.ArticuloFacade;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -25,16 +28,30 @@ import javax.faces.model.SelectItem;
 @SessionScoped
 public class VentaController implements Serializable {
 
+    @EJB
+    private ArticuloFacade articuloFacade;
+    
     private Venta current;
+    
+//    private List lst = current.getArticulosComprados();
+    
+    
     private DataModel items = null;
     @EJB
     private com.udea.tiendamascotas.ejb.VentaFacade ejbFacade;
+    
+    
     private com.udea.tiendamascotas.ejb.ArticuloFacade ejbArticuloFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
     private String idArticulosComprados;
+    private ArticuloController articuloController;
 
     public VentaController() {
+    }
+
+    private ArticuloController getArticuloController() {
+        return articuloController;
     }
 
     public String getIdArticulosComprados() {
@@ -57,11 +74,7 @@ public class VentaController implements Serializable {
     private VentaFacade getFacade() {
         return ejbFacade;
     }
-
-    private com.udea.tiendamascotas.ejb.ArticuloFacade getArticuloFacade() {
-        return ejbArticuloFacade;
-    }
-
+    
     public PaginationHelper getPagination() {
         if (pagination == null) {
             pagination = new PaginationHelper(10) {
@@ -182,21 +195,27 @@ public class VentaController implements Serializable {
         }
     }
 
-    public List<String> getNombreArticulosComprados(List articulosComprados) {
+    
+    public List getarticulos(){
+      return current.getArticulosComprados();
+    }
+    
+    public List<String> getNombreArticulosComprados(List articulosComprados){
         List<String> nombreArticulos = new ArrayList<>();
+        List<Articulo> allArticulos = articuloFacade.findAllArticulos();
         Long id;
         for (int i = 0; i < articulosComprados.size(); i++) {
-            try {
                 id =(Long) articulosComprados.get(i);
-                Articulo art = getArticuloFacade().find(id);
-                nombreArticulos.add(art.getNombre());
-            } catch (NullPointerException e) {
-
+            for (Articulo allArticulo : allArticulos) {
+                if(Objects.equals(allArticulo.getId_articulo(), id)){
+                    nombreArticulos.add(allArticulo.getNombre());
+                }
             }
         }
+
         return nombreArticulos;
     }
-
+                
     public DataModel getItems() {
         if (items == null) {
             items = getPagination().createPageDataModel();
@@ -234,10 +253,6 @@ public class VentaController implements Serializable {
 
     public Venta getVenta(java.lang.Long id) {
         return ejbFacade.find(id);
-    }
-
-    public com.udea.tiendamascotas.ejb.ArticuloFacade getEjbArticuloFacade() {
-        return ejbArticuloFacade;
     }
 
     @FacesConverter(forClass = Venta.class)

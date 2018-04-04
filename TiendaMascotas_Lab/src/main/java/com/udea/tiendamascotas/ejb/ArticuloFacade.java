@@ -6,10 +6,12 @@
 package com.udea.tiendamascotas.ejb;
 
 import com.udea.tiendamascotas.entity.Articulo;
+import java.util.List;
 import javax.annotation.PreDestroy;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -29,6 +31,19 @@ public class ArticuloFacade extends AbstractFacade<Articulo> {
     public ArticuloFacade() {
         super(Articulo.class);
     }
+    
+    public Articulo findById(long id){
+        String q = "Select a from Articulo a where a.id_articulo=:id_articulo";
+        Query query = em.createNamedQuery(q);
+        query.setParameter("id_articulo", id);
+        return (Articulo) query.getSingleResult();
+    }
+        
+    public List<Articulo> findAllArticulos(){
+        Query query = em.createNamedQuery("Articulo.findAll");
+        return (List<Articulo>) query.getResultList();
+    }    
+
 
     @PreDestroy
     public void destruct() {

@@ -9,14 +9,27 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author gaviriza
  */
+
+@Table(name = "factura")
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Factura.findAll", query = "SELECT a FROM Factura a")
+    , @NamedQuery(name = "Factura.findByIdArticulo", query = "SELECT a FROM Factura a WHERE a.id_factura = :id_factura")
+    , @NamedQuery(name = "Factura.findByNombreComprador", query = "SELECT a FROM Factura a WHERE a.nombre_comprador = :nombre_comprador")
+    , @NamedQuery(name = "Factura.findByFecha", query = "SELECT a FROM Factura a WHERE a.fecha = :fecha")
+    , @NamedQuery(name = "Automovil.findByPrecio", query = "SELECT a FROM Articulo a WHERE a.foto = :foto")})
 @Entity
 public class Factura implements Serializable {
 

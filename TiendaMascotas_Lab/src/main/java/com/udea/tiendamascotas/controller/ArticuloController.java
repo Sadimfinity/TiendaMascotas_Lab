@@ -6,6 +6,7 @@ import com.udea.tiendamascotas.controller.util.PaginationHelper;
 import com.udea.tiendamascotas.ejb.ArticuloFacade;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -28,10 +29,18 @@ public class ArticuloController implements Serializable {
     private com.udea.tiendamascotas.ejb.ArticuloFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    private List<Articulo> allArticulos;
 
     public ArticuloController() {
     }
 
+    public List<Articulo> getAllArticulos(){
+        if(allArticulos.isEmpty()){
+            allArticulos = getFacade().findAll();
+        }
+        return allArticulos;
+    }
+    
     public Articulo getSelected() {
         if (current == null) {
             current = new Articulo();
