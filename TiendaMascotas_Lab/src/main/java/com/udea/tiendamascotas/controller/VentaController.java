@@ -5,14 +5,10 @@ import com.udea.tiendamascotas.controller.util.JsfUtil;
 import com.udea.tiendamascotas.controller.util.PaginationHelper;
 import com.udea.tiendamascotas.ejb.VentaFacade;
 import com.udea.tiendamascotas.entity.Articulo;
-import com.udea.tiendamascotas.controller.ArticuloController;
 import com.udea.tiendamascotas.ejb.ArticuloFacade;
-
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Objects;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -38,8 +34,6 @@ public class VentaController implements Serializable {
     private DataModel items = null;
     @EJB
     private com.udea.tiendamascotas.ejb.VentaFacade ejbFacade;
-
-    private com.udea.tiendamascotas.ejb.ArticuloFacade ejbArticuloFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
     private String idArticulosComprados;
@@ -130,14 +124,21 @@ public class VentaController implements Serializable {
         }
     }
 
-    public String prepareEdit() {
-        current = (Venta) getItems().getRowData();
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        return "Edit";
-    }
-
     public String update() {
         try {
+            String json = getIdArticulosComprados();
+            json = json.replace("[", "");
+            json = json.replace("]", "");
+            String[] conjuntoIds = json.split(",");
+            List listIds = new LinkedList();
+            int idEntrante;
+            long id;
+            for (int i = 0; i < conjuntoIds.length; i++) {
+                idEntrante = Integer.valueOf(conjuntoIds[i]);
+                id = (long) idEntrante;
+                listIds.add(i, id);
+            }
+            current.setArticulosComprados(listIds);
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("VentaUpdated"));
             return "View";
@@ -145,6 +146,12 @@ public class VentaController implements Serializable {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
         }
+    }
+
+    public String prepareEdit() {
+        current = (Venta) getItems().getRowData();
+        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        return "Edit";
     }
 
     public String destroy() {
@@ -198,15 +205,15 @@ public class VentaController implements Serializable {
     }
 
     public String getNombreArticulosComprados(List idArticulosComprados) {
-        String nombreArticulos = "";
+        String nombreArticulosComprados = "";
         long id;
         Articulo art;
         for (int i = 0; i < idArticulosComprados.size(); i++) {
             id = (long) idArticulosComprados.get(i);
             art = articuloFacade.findArticuloById(id);
-            nombreArticulos = nombreArticulos + ", " + art.getNombre();
+            nombreArticulosComprados = nombreArticulosComprados + art.getNombre() + ", ";
         }
-        return nombreArticulos;
+        return nombreArticulosComprados;
     }
 
     public DataModel getItems() {

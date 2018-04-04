@@ -18,7 +18,7 @@
                     <h:outputText value="#{bundle.ViewVentaLabel_id_venta}"/>
                     <h:outputText value="#{ventaController.selected.id_venta}" title="#{bundle.ViewVentaTitle_id_venta}"/>
                     <h:outputText value="#{bundle.ViewVentaLabel_articulosComprados}"/>
-                    <h:outputText value="#{ventaController.selected.articulosComprados}" title="#{bundle.ViewVentaTitle_articulosComprados}"/>
+                    <h:outputText value="#{ventaController.getNombreArticulosComprados(ventaController.selected.articulosComprados)}" title="#{bundle.ViewVentaTitle_articulosComprados}"/>
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{ventaController.destroyAndView}" value="#{bundle.ViewVentaDestroyLink}"/>
