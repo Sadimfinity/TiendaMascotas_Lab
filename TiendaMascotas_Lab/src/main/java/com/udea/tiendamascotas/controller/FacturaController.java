@@ -4,8 +4,11 @@ import com.udea.tiendamascotas.entity.Factura;
 import com.udea.tiendamascotas.controller.util.JsfUtil;
 import com.udea.tiendamascotas.controller.util.PaginationHelper;
 import com.udea.tiendamascotas.ejb.FacturaFacade;
+import com.udea.tiendamascotas.entity.Articulo;
+import com.udea.tiendamascotas.entity.Venta;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -81,13 +84,23 @@ public class FacturaController implements Serializable {
 
     public String create() {
         try {
-            getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("FacturaCreated"));
-            return prepareCreate();
+            try {
+                List<Articulo> error = current.getVenta().getArticulos();
+                if (error == null) {
+                    return null;
+                } else {
+                    getFacade().create(current);
+                    JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("FacturaCreated"));
+                    return prepareCreate();
+                }
+            } catch (NullPointerException e) {
+                JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("CreateFacturaRequiredMessageVenta"));
+            }
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
         }
+        return null;
     }
 
     public String prepareEdit() {
@@ -98,13 +111,23 @@ public class FacturaController implements Serializable {
 
     public String update() {
         try {
+            try {
+                List<Articulo> error = current.getVenta().getArticulos();
+                if (error == null) {
+                    return null;
+                } else {
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("FacturaUpdated"));
             return "View";
+                }
+                            } catch (NullPointerException e) {
+                JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("CreateFacturaRequiredMessageVenta"));
+            }
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
         }
+        return null;
     }
 
     public String destroy() {

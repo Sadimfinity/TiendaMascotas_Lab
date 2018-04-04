@@ -42,7 +42,6 @@ public class Venta implements Serializable {
     @OneToMany(targetEntity = Articulo.class)
     private List<Articulo> articulos;
     
-    
     public Venta() {
     }
 
@@ -98,7 +97,7 @@ public class Venta implements Serializable {
 
     @Override
     public String toString() {
-        return "Articulos comprados: "+ articulosComprados;
+        return "Articulos comprados: " + articulosComprados;
     }
 
 }

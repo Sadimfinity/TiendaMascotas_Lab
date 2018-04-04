@@ -56,12 +56,22 @@ public class Factura implements Serializable {
 
     @OneToOne(targetEntity = Venta.class)
     private Venta venta;
+    
+    private Double precioTotal;
 
     public Factura(Long id_factura, String nombre_comprador, Date fecha, String nombre_vendedor) {
         this.id_factura = id_factura;
         this.nombre_comprador = nombre_comprador;
         this.fecha = fecha;
         this.nombre_vendedor = nombre_vendedor;
+    }
+
+    public void setPrecioTotal(Double precioTotal) {
+        this.precioTotal = precioTotal;
+    }
+
+    public Double getPrecioTotal() {
+        return precioTotal;
     }
 
     public Factura() {
