@@ -21,6 +21,7 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import com.udea.tiendamascotas.ejb.ArticuloFacade;
+import java.util.Objects;
 
 @Named("facturaController")
 @SessionScoped
@@ -88,6 +89,12 @@ public class FacturaController implements Serializable {
     public String create() {
         try {
             try {
+                List<Factura> allFacturas = getFacade().findAll();
+                for (Factura allFactura : allFacturas) {
+                    if(Objects.equals(current.getId_factura(), allFactura.getId_factura())){
+                        return null;
+                    }
+                }
                 List<Articulo> error = current.getVenta().getArticulos();
                 if (error == null) {
                     return null;
@@ -134,6 +141,7 @@ public class FacturaController implements Serializable {
                 if (error == null) {
                     return null;
                 } else {
+                    current.setPrecioTotal(calcularTotal(current));
                     getFacade().edit(current);
                     JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("FacturaUpdated"));
                     return "View";

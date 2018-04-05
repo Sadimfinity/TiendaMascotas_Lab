@@ -26,7 +26,9 @@
                     <h:outputText value="#{bundle.ViewFacturaLabel_nombre_vendedor}"/>
                     <h:outputText value="#{facturaController.selected.nombre_vendedor}" title="#{bundle.ViewFacturaTitle_nombre_vendedor}"/>
                     <h:outputText value="#{bundle.ViewFacturaLabel_venta}"/>
-                    <h:outputText value="#{facturaController.selected.venta}" title="#{bundle.ViewFacturaTitle_venta}"/>
+                    <h:outputText value="#{facturaController.selected.venta.toString()}" title="#{bundle.ViewFacturaTitle_venta}"/>
+                    <h:outputText value="#{bundle.ViewFacturaLabel_total}"/>
+                    <h:outputText value="#{facturaController.selected.precioTotal} $" title="#{bundle.ViewFacturaTitle_total}"/>
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{facturaController.destroyAndView}" value="#{bundle.ViewFacturaDestroyLink}"/>
