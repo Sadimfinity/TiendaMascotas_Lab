@@ -32,6 +32,7 @@ public class FacturaController implements Serializable {
     private com.udea.tiendamascotas.ejb.FacturaFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    @EJB
     private ArticuloFacade articuloFacade;
 
     public FacturaController() {
@@ -91,19 +92,19 @@ public class FacturaController implements Serializable {
                 if (error == null) {
                     return null;
                 } else {
-
+                    current.setPrecioTotal(calcularTotal(current));
+                    getFacade().create(current);
+                    JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("FacturaCreated"));
+                    return prepareCreate();
                 }
             } catch (NullPointerException e) {
                 JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("CreateFacturaRequiredMessageVenta"));
             }
-            current.setPrecioTotal(calcularTotal(current));
-            getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("FacturaCreated"));
-            return prepareCreate();
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
         }
+        return null;
     }
 
     private Double calcularTotal(Factura current) {
@@ -133,11 +134,11 @@ public class FacturaController implements Serializable {
                 if (error == null) {
                     return null;
                 } else {
-            getFacade().edit(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("FacturaUpdated"));
-            return "View";
+                    getFacade().edit(current);
+                    JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("FacturaUpdated"));
+                    return "View";
                 }
-                            } catch (NullPointerException e) {
+            } catch (NullPointerException e) {
                 JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("CreateFacturaRequiredMessageVenta"));
             }
         } catch (Exception e) {

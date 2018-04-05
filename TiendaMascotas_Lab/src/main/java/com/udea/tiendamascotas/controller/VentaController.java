@@ -27,23 +27,15 @@ public class VentaController implements Serializable {
 
     @EJB
     private ArticuloFacade articuloFacade;
-
     private Venta current;
-
-//    private List lst = current.getArticulosComprados();
     private DataModel items = null;
     @EJB
     private com.udea.tiendamascotas.ejb.VentaFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
     private String idArticulosComprados;
-    private ArticuloController articuloController;
 
     public VentaController() {
-    }
-
-    private ArticuloController getArticuloController() {
-        return articuloController;
     }
 
     public String getIdArticulosComprados() {
