@@ -57,6 +57,8 @@ public class Factura implements Serializable {
     @OneToOne(targetEntity = Venta.class)
     private Venta venta;
     
+    @Column(name="total")
+    @Basic
     private Double precioTotal;
 
     public Factura(Long id_factura, String nombre_comprador, Date fecha, String nombre_vendedor) {

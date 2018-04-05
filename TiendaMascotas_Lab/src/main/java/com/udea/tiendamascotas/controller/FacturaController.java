@@ -20,6 +20,7 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import com.udea.tiendamascotas.ejb.ArticuloFacade;
 
 @Named("facturaController")
 @SessionScoped
@@ -31,6 +32,7 @@ public class FacturaController implements Serializable {
     private com.udea.tiendamascotas.ejb.FacturaFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    private ArticuloFacade articuloFacade;
 
     public FacturaController() {
     }
@@ -89,18 +91,33 @@ public class FacturaController implements Serializable {
                 if (error == null) {
                     return null;
                 } else {
-                    getFacade().create(current);
-                    JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("FacturaCreated"));
-                    return prepareCreate();
+
                 }
             } catch (NullPointerException e) {
                 JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("CreateFacturaRequiredMessageVenta"));
             }
+            current.setPrecioTotal(calcularTotal(current));
+            getFacade().create(current);
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("FacturaCreated"));
+            return prepareCreate();
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
         }
-        return null;
+    }
+
+    private Double calcularTotal(Factura current) {
+        Double total = 0.0;
+        long id;
+        Articulo article;
+        Venta venta = current.getVenta();
+        List articulosComprados = venta.getArticulosComprados();
+        for (int i = 0; i < articulosComprados.size(); i++) {
+            id = (long) articulosComprados.get(i);
+            article = articuloFacade.findArticuloById(id);
+            total = total + article.getPrecio();
+        }
+        return total;
     }
 
     public String prepareEdit() {
