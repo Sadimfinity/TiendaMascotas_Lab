@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
@@ -21,6 +22,12 @@
                     <h:inputText id="nombre" value="#{articuloController.selected.nombre}" title="#{bundle.CreateArticuloTitle_nombre}" required="true" requiredMessage="#{bundle.CreateArticuloRequiredMessage_nombre}"/>
                     <h:outputLabel value="#{bundle.CreateArticuloLabel_precio}" for="precio" />
                     <h:inputText id="precio" value="#{articuloController.selected.precio}" title="#{bundle.CreateArticuloTitle_precio}" required="true" requiredMessage="#{bundle.CreateArticuloRequiredMessage_precio}"/>
+                    <h:outputLabel value="#{bundle.CreateArticuloLabel_foto}" for="foto" />
+                    <h:form enctype="multipart/form-data">
+                        <p:growl id="messages" showDetail="true" />
+                        <p:fileUpload value="#{articuloController.selected.foto}" mode="simple" skinSimple="true"/>
+                        <p:commandButton value="Submit" ajax="false" actionListener="#{fileUploadView.upload}" disabled="true" />
+                    </h:form>
                     <h:outputLabel value="#{bundle.CreateArticuloLabel_especie}" for="especie" />
                     <h:inputText id="especie" value="#{articuloController.selected.especie}" title="#{bundle.CreateArticuloTitle_especie}" />
                     <h:outputLabel value="#{bundle.CreateArticuloLabel_raza}" for="raza" />
