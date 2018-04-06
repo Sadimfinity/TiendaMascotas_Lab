@@ -31,19 +31,17 @@ public class ArticuloFacade extends AbstractFacade<Articulo> {
     public ArticuloFacade() {
         super(Articulo.class);
     }
-    
-        
-    public List<Articulo> findAllArticulos(){
+
+    public List<Articulo> findAllArticulos() {
         Query query = em.createNamedQuery("Articulo.findAll");
         return (List<Articulo>) query.getResultList();
-    }    
-    
-    public Articulo findArticuloById(long id){
+    }
+
+    public Articulo findArticuloById(long id) {
         Query query = em.createNamedQuery("Articulo.findByIdArticulo");
         query.setParameter("id_articulo", id);
         return (Articulo) query.getSingleResult();
     }
-
 
     @PreDestroy
     public void destruct() {

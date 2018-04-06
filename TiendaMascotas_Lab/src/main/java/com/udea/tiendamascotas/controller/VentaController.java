@@ -39,6 +39,7 @@ public class VentaController implements Serializable {
     }
 
     public String getIdArticulosComprados() {
+
         return idArticulosComprados;
     }
 
@@ -110,10 +111,11 @@ public class VentaController implements Serializable {
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("VentaCreated"));
             return prepareCreate();
+
         } catch (NumberFormatException e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
-            return null;
         }
+        return null;
     }
 
     public String update() {
@@ -134,7 +136,7 @@ public class VentaController implements Serializable {
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("VentaUpdated"));
             return "View";
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
         }
