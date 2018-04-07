@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewArticuloTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewArticuloLabel_id_articulo}"/>
+                    <h:outputText value="#{articuloController.selected.id_articulo}" title="#{bundle.ViewArticuloTitle_id_articulo}"/>
+                    <h:outputText value="#{bundle.ViewArticuloLabel_nombre}"/>
+                    <h:outputText value="#{articuloController.selected.nombre}" title="#{bundle.ViewArticuloTitle_nombre}"/>
+                    <h:outputText value="#{bundle.ViewArticuloLabel_precio}"/>
+                    <h:outputText value="#{articuloController.selected.precio}" title="#{bundle.ViewArticuloTitle_precio}"/>
+                    <h:outputText value="#{bundle.ViewArticuloLabel_especie}"/>
+                    <h:outputText value="#{articuloController.selected.especie}" title="#{bundle.ViewArticuloTitle_especie}"/>
+                    <h:outputText value="#{bundle.ViewArticuloLabel_raza}"/>
+                    <h:outputText value="#{articuloController.selected.raza}" title="#{bundle.ViewArticuloTitle_raza}"/>
+                    <h:outputText value="#{bundle.ViewArticuloLabel_edad}"/>
+                    <h:outputText value="#{articuloController.selected.edad}" title="#{bundle.ViewArticuloTitle_edad}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{articuloController.destroyAndView}" value="#{bundle.ViewArticuloDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewArticuloEditLink}"/>
+                <br />
+                <h:commandLink action="#{articuloController.prepareCreate}" value="#{bundle.ViewArticuloCreateLink}" />
+                <br />
+                <h:commandLink action="#{articuloController.prepareList}" value="#{bundle.ViewArticuloShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewArticuloIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

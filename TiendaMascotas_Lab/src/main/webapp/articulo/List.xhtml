@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListArticuloTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListArticuloEmpty}" rendered="#{articuloController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{articuloController.items.rowCount > 0}">
+                    <h:outputText value="#{articuloController.pagination.pageFirstItem + 1}..#{articuloController.pagination.pageLastItem + 1}/#{articuloController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{articuloController.previous}" value="#{bundle.Previous} #{articuloController.pagination.pageSize}" rendered="#{articuloController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{articuloController.next}" value="#{bundle.Next} #{articuloController.pagination.pageSize}" rendered="#{articuloController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{articuloController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListArticuloTitle_id_articulo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id_articulo}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListArticuloTitle_nombre}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombre}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListArticuloTitle_precio}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.precio}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListArticuloTitle_especie}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.especie}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListArticuloTitle_raza}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.raza}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListArticuloTitle_edad}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.edad}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{articuloController.prepareView}" value="#{bundle.ListArticuloViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{articuloController.prepareEdit}" value="#{bundle.ListArticuloEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{articuloController.destroy}" value="#{bundle.ListArticuloDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{articuloController.prepareCreate}" value="#{bundle.ListArticuloCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListArticuloIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

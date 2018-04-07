@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditArticuloTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditArticuloLabel_nombre}" for="nombre" />
+                    <h:inputText id="nombre" value="#{articuloController.selected.nombre}" title="#{bundle.EditArticuloTitle_nombre}" required="true" requiredMessage="#{bundle.EditArticuloRequiredMessage_nombre}"/>
+                    <h:outputLabel value="#{bundle.EditArticuloLabel_precio}" for="precio" />
+                    <h:inputText id="precio" value="#{articuloController.selected.precio}" title="#{bundle.EditArticuloTitle_precio}" required="true" requiredMessage="#{bundle.EditArticuloRequiredMessage_precio}"/>
+                    <h:outputLabel value="#{bundle.EditArticuloLabel_especie}" for="especie" />
+                    <h:inputText id="especie" value="#{articuloController.selected.especie}" title="#{bundle.EditArticuloTitle_especie}" />
+                    <h:outputLabel value="#{bundle.EditArticuloLabel_raza}" for="raza" />
+                    <h:inputText id="raza" value="#{articuloController.selected.raza}" title="#{bundle.EditArticuloTitle_raza}" />
+                    <h:outputLabel value="#{bundle.EditArticuloLabel_edad}" for="edad" />
+                    <h:inputText id="edad" value="#{articuloController.selected.edad}" title="#{bundle.EditArticuloTitle_edad}" />
+                </h:panelGrid>
+                <h:commandLink action="#{articuloController.update}" value="#{bundle.EditArticuloSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditArticuloViewLink}"/>
+                <br />
+                <h:commandLink action="#{articuloController.prepareList}" value="#{bundle.EditArticuloShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditArticuloIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
