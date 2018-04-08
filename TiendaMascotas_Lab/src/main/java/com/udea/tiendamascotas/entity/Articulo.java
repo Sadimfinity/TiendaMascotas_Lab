@@ -52,7 +52,7 @@ public class Articulo implements Serializable {
     @Lob
     @Basic
     @NotNull(message = "Ingrese una foto")
-    private byte[] foto;
+    private String foto;
 
     @Column(name = "especie")
     @Basic
@@ -69,7 +69,7 @@ public class Articulo implements Serializable {
     public Articulo() {
     }
 
-    public Articulo(Long id_articulo, String nombre, Double precio, byte[] foto, String especie, String raza, int edad) {
+    public Articulo(Long id_articulo, String nombre, Double precio, String foto, String especie, String raza, int edad) {
         this.id_articulo = id_articulo;
         this.nombre = nombre;
         this.precio = precio;
@@ -103,11 +103,11 @@ public class Articulo implements Serializable {
         this.precio = precio;
     }
 
-    public byte[] getFoto() {
+    public String getFoto() {
         return this.foto;
     }
 
-    public void setFoto(byte[] foto) {
+    public void setFoto(String foto) {
         this.foto = foto;
     }
 

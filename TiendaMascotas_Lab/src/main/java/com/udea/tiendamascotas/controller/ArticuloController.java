@@ -4,8 +4,11 @@ import com.udea.tiendamascotas.entity.Articulo;
 import com.udea.tiendamascotas.controller.util.JsfUtil;
 import com.udea.tiendamascotas.controller.util.PaginationHelper;
 import com.udea.tiendamascotas.ejb.ArticuloFacade;
-
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
+import java.nio.file.Files;
 import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
@@ -18,8 +21,11 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.naming.NamingException;
+import org.primefaces.model.UploadedFile;
 
 @Named("articuloController")
+
 @SessionScoped
 public class ArticuloController implements Serializable {
 
@@ -30,17 +36,27 @@ public class ArticuloController implements Serializable {
     private PaginationHelper pagination;
     private int selectedItemIndex;
     private List<Articulo> allArticulos;
+    private UploadedFile uploadedFile;
+    private UploadedFile foto;
 
-    public ArticuloController() {
+    
+        public ArticuloController() {
+    }
+    public UploadedFile getFoto() {
+        return foto;
     }
 
-    public List<Articulo> getAllArticulos(){
-        if(allArticulos.isEmpty()){
+    public List<Articulo> getAllArticulos() {
+        if (allArticulos.isEmpty()) {
             allArticulos = getFacade().findAll();
         }
         return allArticulos;
     }
-    
+
+        public UploadedFile getUploadedFile() {
+        return uploadedFile;
+    }
+
     public Articulo getSelected() {
         if (current == null) {
             current = new Articulo();
@@ -87,32 +103,38 @@ public class ArticuloController implements Serializable {
         selectedItemIndex = -1;
         return "Create";
     }
-
-    public String create() {
+    
+    
+    
+    public String create() throws IOException, NamingException {
         try {
+            try{
             String especie = current.getEspecie();
             String raza = current.getRaza();
             int edad = current.getEdad();
-            if(especie.equals("")){
+            if (especie.equals("")) {
                 current.setEspecie(null);
             }
-            if(raza.equals("")){
+            if (raza.equals("")) {
                 current.setRaza(null);
             }
-            if(String.valueOf(edad).equals("")){
+            if (String.valueOf(edad).equals("")) {
                 current.setEdad(0);
             }
-            byte[] a = new byte[] { (byte)0xe0, 0x4f, (byte)0xd0, 0x20, (byte)0xea, 0x3a, 0x69, 0x10, (byte)0xa2, (byte)0xd8, 0x08, 0x00, 0x2b, 0x30, 0x30, (byte)0x9d };
-            current.setFoto(a);
+            current.setFoto("A random path");
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ArticuloCreated"));
             return prepareCreate();
+            } catch (NullPointerException e){
+                return null;
+            }
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
         }
     }
 
+    
     public String prepareEdit() {
         current = (Articulo) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();

@@ -1,11 +1,12 @@
 package com.udea.tiendamascotas.controller;
-
 import com.udea.tiendamascotas.entity.Venta;
 import com.udea.tiendamascotas.controller.util.JsfUtil;
 import com.udea.tiendamascotas.controller.util.PaginationHelper;
 import com.udea.tiendamascotas.ejb.VentaFacade;
 import com.udea.tiendamascotas.entity.Articulo;
 import com.udea.tiendamascotas.ejb.ArticuloFacade;
+import java.io.File;
+
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
@@ -20,6 +21,7 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import org.primefaces.model.UploadedFile;
 
 @Named("ventaController")
 @SessionScoped
@@ -34,6 +36,7 @@ public class VentaController implements Serializable {
     private PaginationHelper pagination;
     private int selectedItemIndex;
     private String idArticulosComprados;
+    
 
     public VentaController() {
     }
